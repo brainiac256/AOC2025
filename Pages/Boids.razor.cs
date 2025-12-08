@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Numerics;
 using Microsoft.JSInterop;
@@ -26,12 +27,13 @@ namespace AOC2025.Pages
         protected override void OnInitialized()
         {
             base.OnInitialized();
+            Console.WriteLine("OnInit");
         }
 
         protected override void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
-
+            Console.WriteLine("OnAfterRender");
             if (firstRender)
             {
                 Init();
@@ -56,6 +58,7 @@ namespace AOC2025.Pages
         [JSInvokable]
         public void TickDotNet()
         {
+            Console.WriteLine("Tick");
             if(_root is null) return;
             if (cs == null)
             {
