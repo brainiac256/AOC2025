@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "AOC2025",
   "resources": {
-    "hash": "sha256-T0jIP6UXsXjUb1WVsRHglX31qdB8/I74S8EpDLStQy0=",
+    "hash": "sha256-3bbd/zhN8c7oNPm5nj28T4fcbE/hbNgg5NE+E2bno3c=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-vtotCeXt2UD6oc459laJT32vBgigZ+eLoUmdeFkvYDk="
     },
@@ -67,7 +67,7 @@
       "System.Xml.ReaderWriter.wasm": "sha256-NwWRzueI6v1s6+GUz9m33cUOyyKW4s8JeJZqjP0rTl8=",
       "System.Xml.XmlSerializer.wasm": "sha256-KRFN5VoWgTOHnp6+PJD2V53P7tqGc4aaS8osUX3lLx8=",
       "System.Private.CoreLib.wasm": "sha256-lg4gXC01vuoa50QFLrm7uxJghgyHgvuB3CwOVp2xlUQ=",
-      "AOC2025.wasm": "sha256-Rbvup/+jI6fQkSzByf1TIKPuc5sMgwZxu+S5OrLuBZM="
+      "AOC2025.wasm": "sha256-FgDj3aqZVe2ZlppSfeX2SJSl4U5vhL5qIr8wNKLTL+k="
     }
   },
   "cacheBootResources": true,
