@@ -21,7 +21,6 @@ namespace AOC2025.Puzzles.Boids
             {
                 cs.Save();
                 cs.Translate(0,0);
-                cs.Scale(2,2);
                 DrawRect(cs, 0,0,800,480, "#aa3333");
                 DrawRect(cs, 50,50,700,380, "#3333aa");
                 if(mousepos.X >= 0 && mousepos.X <= 800 && mousepos.Y >= 0 && mousepos.Y <= 480)
@@ -39,7 +38,7 @@ namespace AOC2025.Puzzles.Boids
             mousepos = uc.ToLocal(
                 uc.CurrTouchState.IsPressed ?
                 uc.CurrTouchState.Position :
-                uc.CurrMouseState.Position) / 2.0f;
+                uc.CurrMouseState.Position) ;
             float dt_sec = (float)uc.dt.TotalSeconds;
             mouseAnimationOffset += dt_sec;
             base.Update(uc);

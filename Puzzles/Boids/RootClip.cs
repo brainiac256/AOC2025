@@ -26,6 +26,7 @@ namespace AOC2025.Puzzles.Boids
 
             FrameClip frame = new FrameClip();
             frame.Position = new Vector2(0,0);
+            frame.Scale = 2;
             Add(frame);
         }
 
