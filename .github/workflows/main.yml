@@ -22,7 +22,7 @@ jobs:
     - name: provide 404 handling
       run: cp release/wwwroot/index.html release/wwwroot/404.html
     - name: Deploy to Github Pages
-      uses: JamesIves/github-pages-deploy-action@4.7.4
+      uses: JamesIves/github-pages-deploy-action@v4.7.4
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
