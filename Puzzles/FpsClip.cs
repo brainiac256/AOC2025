@@ -7,7 +7,7 @@ using AOC2025.Engine;
 using aeVector2 = nkast.Aether.Physics2D.Common.Vector2;
 using AOC2025.Extensions;
 
-namespace AOC2025.Puzzles.Boids
+namespace AOC2025.Puzzles
 {
     public partial class FpsClip: Clip
     {

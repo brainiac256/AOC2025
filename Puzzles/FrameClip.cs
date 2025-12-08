@@ -2,7 +2,7 @@ using System.Numerics;
 using AOC2025.Engine;
 using nkast.Wasm.Canvas;
 
-namespace AOC2025.Puzzles.Boids
+namespace AOC2025.Puzzles
 {
     public partial class FrameClip : Clip
     {
