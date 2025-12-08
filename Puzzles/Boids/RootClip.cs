@@ -23,6 +23,10 @@ namespace AOC2025.Puzzles.Boids
             FpsClip fps = new FpsClip();
             fps.Position = new Vector2(10,20);
             Add(fps);
+
+            FrameClip frame = new FrameClip();
+            frame.Position = new Vector2(0,0);
+            Add(frame);
         }
 
         public override void Update(UpdateContext uc)

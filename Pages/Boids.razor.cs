@@ -27,13 +27,11 @@ namespace AOC2025.Pages
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            Console.WriteLine("OnInit");
         }
 
         protected override void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
-            Console.WriteLine("OnAfterRender");
             if (firstRender)
             {
                 Init();
@@ -58,7 +56,6 @@ namespace AOC2025.Pages
         [JSInvokable]
         public void TickDotNet()
         {
-            Console.WriteLine("Tick");
             if(_root is null) return;
             if (cs == null)
             {

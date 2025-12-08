@@ -32,8 +32,7 @@ namespace AOC2025.Puzzles.Boids
                 cs.Font = $"24px bold Verdana";
                 cs.TextAlign = TextAlign.Left;
                 cs.TextBaseline = TextBaseline.Middle;
-
-                cs.FillText("FPS: " + fps, 0, 0);
+                cs.FillText("FPS: " + fps, 50, 50);
                 cs.Restore();                
             }
 
