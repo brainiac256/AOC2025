@@ -1,0 +1,29 @@
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-to-ghpages:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v5.0.1
+      with:
+        dotnet-version: 8.x
+    - name: publish proj
+      run: dotnet publish AOC2025.csproj -c Release -o release --nologo
+    - name: fix base-tag
+      run: sed -i 's/<base href="\/" \/>/<base href="\/AOC2025\/" \/>/g' release/wwwroot/index.html
+    - name: add nojekyll file
+      run: touch release/wwwroot/.nojekyll
+    - name: provide 404 handling
+      run: cp release/wwwroot/index.html release/wwwroot/404.html
+    - name: Deploy to Github Pages
+      uses: JamesIves/github-pages-deploy-action@4.7.4
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: release/wwwroot
