@@ -4,19 +4,18 @@
     <PageTitle>Boids demo</PageTitle>
 </HeadContent>
 
-<div id="canvasHolder" style="
-    background: #fff;
-    margin: 0%;
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-">
-    <canvas id="theCanvas"></canvas>
-</div>
+<MudPaper>
+    <MudText Typo=Typo.h2>Boids Demo</MudText>
+    <MudText Typo=Typo.body1>
+        None of my own code (mostly). Tweaked nkast's sample page to get arbitrary canvas placement working, but aside from that, everything is lifted from
+        <MudLink Href="https://github.com/nkast/Wasm/tree/main/Samples/Boids">nkast's Boids demo.</MudLink> The mouse tracking after resize might still be a little wonky, due to the
+        auto closing of the MudBlazor sidebar at a certain flexbox breakpoint, which changes the absolute position of the canvas without notifying the window. So I've locked the menu
+        drawer in the open position instead of going for a truly responsive design. Oh well.
+    </MudText>
+    <MudText Typo=Typo.body1>
+        Things I did change: I added a couple of frame lines to indicate the limit of the canvas and the limit of the area the boids would turn from, as well as added an animated
+        mouse locator. Wave your mouse over the Canvas area below to see the boids in action.
+    </MudText>
+</MudPaper>
 
-
-<img id="image1" src="icon-192.png" width="100" height="100" style="visibility:collapse;"/>
+<SimContainer T=@AOC2025.Puzzles.Boids.RootClip />

@@ -61,6 +61,29 @@
             }
         });
     </script>
+    <script type="module">
+    window.getElementAbsolutePosition = (element) => {
+        if (!element) {
+            return null;
+        }
+        // getBoundingClientRect() returns position relative to the viewport.
+        const rect = element.getBoundingClientRect();
+
+        // To get the position relative to the whole document, 
+        // add the scroll offsets.
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+        return {
+            Top: rect.top + scrollTop,
+            Left: rect.left + scrollLeft,
+            Right: rect.right + scrollLeft,
+            Bottom: rect.bottom + scrollTop,
+            Width: rect.width,
+            Height: rect.height
+        };
+    };
+    </script>
     <!-- Important: Increment the version parameter whenever you update MudBlazor to prevent caching issues -->
     <script src="_content/MudBlazor/MudBlazor.min.js?v=1"></script>
 

@@ -41,7 +41,6 @@ namespace AOC2025.Puzzles.Boids
         IBroadPhase<int> bpav = new DynamicTreeBroadPhase<int>();
         private readonly Random Rand = new Random();
 
-
         public BoidsClip() : base()
         {
             base.size = new Size(800, 480);
@@ -271,15 +270,7 @@ namespace AOC2025.Puzzles.Boids
             var cs = dc.CanvasContext;
 
             if (dc.Layer == 0)
-            {
-
-                // draw image
-                cs.Save();
-                cs.Scale(2, 2);
-                cs.GlobalAlpha = 0.2f;
-                cs.DrawImage("image1", 100, 100);
-                cs.Restore();
-                
+            {                
                 cs.FillStyle = "#000000";
 
                 // render each boid

@@ -5,16 +5,19 @@ using nkast.Aether.Physics2D.Collision;
 using nkast.Wasm.Canvas;
 using AOC2025.Engine;
 using aeVector2 = nkast.Aether.Physics2D.Common.Vector2;
+using AOC2025.Extensions;
 
 namespace AOC2025.Puzzles.Boids
 {
     public partial class FpsClip: Clip
     {
         Stopwatch _sw = new Stopwatch();
+        private RingBufferFloat frametimes;
 
         public FpsClip() : base()
         {
             _sw.Start();
+            frametimes = new RingBufferFloat(30);
         }
         
         public override void Draw(DrawContext dc)
@@ -23,8 +26,9 @@ namespace AOC2025.Puzzles.Boids
 
             if (dc.Layer == 2)
             {
-                int fps = (int)(1f / (float)_sw.Elapsed.TotalSeconds);
+                long ms = _sw.ElapsedMilliseconds;
                 _sw.Restart();
+                frametimes.Write(ms);
 
                 // draw fps
                 cs.Save();
@@ -32,7 +36,7 @@ namespace AOC2025.Puzzles.Boids
                 cs.Font = $"24px bold Verdana";
                 cs.TextAlign = TextAlign.Left;
                 cs.TextBaseline = TextBaseline.Middle;
-                cs.FillText("FPS: " + fps, 50, 50);
+                cs.FillText($"Avg frame time: {ms} ms", 50, 50);
                 cs.Restore();                
             }
 

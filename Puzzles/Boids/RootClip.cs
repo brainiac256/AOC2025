@@ -6,7 +6,7 @@ namespace AOC2025.Puzzles.Boids
     internal class RootClip : Clip
     {
 
-        public static Size vres = new Size(1920, 960);
+        public static Size vres = new Size(1600, 960);
 
         BoidsClip? _boids;
 
