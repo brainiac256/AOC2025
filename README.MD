@@ -14,4 +14,4 @@ After doing practically no research at all I settled on using nkast.Wasm as a Ca
 
 ## Where to view
 
-If I haven't put a link here at the time you're reading this, then I haven't completed the very basic step of getting the WASM app to publish to Github Pages yet! Whoops!
+Whenever I finish a puzzle I'll push new code which should update the GitHub Pages deployment automatically! I had to disable trimming in order to get the Canvas integration to work. [Click here!](https://brainiac256.github.io/AOC2025/index.html)
