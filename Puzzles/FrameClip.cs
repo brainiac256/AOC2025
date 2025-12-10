@@ -8,10 +8,12 @@ namespace AOC2025.Puzzles
     {
         Vector2 mousepos;
         float mouseAnimationOffset;
+        TimeSpan simtime;
         public FrameClip() : base()
         {
             mousepos = new Vector2(-1,-1);
             mouseAnimationOffset = 0.0f;
+            simtime = TimeSpan.FromTicks(0);
             base.size = new Size(800, 480);
         }
         public override void Draw(DrawContext dc)
@@ -27,10 +29,22 @@ namespace AOC2025.Puzzles
                 {
                     DrawMouse(cs, mousepos);
                 }
+                DrawText(cs, simtime.ToString(@"mm\:ss\.ffff"));
                 cs.Restore();
             }
             
             base.Draw(dc);
+        }
+
+        public void DrawText(ICanvasRenderingContext cs, string txt)
+        {
+            cs.Save();
+            cs.FillStyle = "#227722";
+            cs.Font = "16px bold Verdana";
+            cs.TextAlign = TextAlign.Left;
+            cs.TextBaseline = TextBaseline.Middle;
+            cs.FillText($"Simulation time: {txt}", 25,445);
+            cs.Restore();
         }
 
         public override void Update(UpdateContext uc)
@@ -41,6 +55,7 @@ namespace AOC2025.Puzzles
                 uc.CurrMouseState.Position) ;
             float dt_sec = (float)uc.dt.TotalSeconds;
             mouseAnimationOffset += dt_sec;
+            simtime = uc.t;
             base.Update(uc);
         }
         private void DrawMouse(ICanvasRenderingContext cs, Vector2 center)

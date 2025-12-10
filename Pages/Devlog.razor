@@ -1,0 +1,113 @@
+@page "/devlog"
+
+<HeadContent>
+    <PageTitle>Advent of Code 2025 - brainiac256 - Devlog</PageTitle>
+</HeadContent>
+
+
+<MudTimeline Reverse=false TimelinePosition=TimelinePosition.Start>
+    <MudTimelineItem>
+        <MudCard Outlined=true>
+            <MudCardContent>
+                <MudText Typo=Typo.h6>Prep (Day Zero)</MudText>
+                <MudText Typo=Typo.body2>
+                    With no research done and no prior experience with the Canvas API, I selected
+                    nkast.Wasm to use for visualizations. After tweaking the Boids demo a bit, I
+                    embarked on the journey of figuring out how I could deploy the static site to
+                    Github Pages. After some questionable maneuvers regarding the loading of
+                    <code>decode.min.js</code>, the key insight was that in order to get the draw
+                    engine working the way I wanted (i.e. with a generic SimContainer component) I
+                    had to disable <code>PublishTrimmed</code> in the csproj.
+                </MudText>
+                <MudText Typo=Typo.body2>
+                    Now with a functioning Github Pages deployment, I charge boldly on to tackle
+                    Day 1 a mere eight days later than everybody else.
+                </MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="boids" Variant=Variant.Filled Color=Color.Primary>Boids Demo</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudTimelineItem>
+    <MudTimelineItem>
+        <MudCard Outlined=true>
+            <MudCardHeader>
+                <MudStack Row>
+                    <MudText Typo=Typo.h6 Inline>Day 1</MudText>
+                    <MudRating MaxValue=2 SelectedValue=1 ReadOnly />
+                </MudStack>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudStack Spacing="2">
+                    <MudText Typo=Typo.body2>
+                    OK, immediately before I even look at the puzzle I know I still have some prep
+                    work to tackle before diving in.
+                </MudText>
+                <MudList T=string Dense ReadOnly>
+                    <MudListItem>
+                        I <b>need</b> to have a way to feed data into a simulation.
+                    </MudListItem>
+                    <MudListItem>
+                        I <b>would like</b> better handling of the canvas size in the draw engine
+                        that I inherited by copying the nkast Boids demo.
+                    </MudListItem>
+                </MudList>
+                <MudText Typo=Typo.body2>
+                    I decide to address the data thing first and wait for a clever solution to present
+                    itself for the virtual resolution issue. I added a <code>SetState()</code> method
+                    which passes the puzzle data as a string. The parsing code will be contained in
+                    each puzzle's RootClip implementation and passed to the particular child clips as
+                    strongly typed data. This way the parsing only needs to happen once, but can be
+                    unique to each puzzle since each puzzle will generally have its own data format.
+                    Then I also omit the <code>base.SetState</code> call because I don't really need it.
+                    This buys me enough functionality to get the sample working, then I can add a .txt
+                    file upload for the full puzzle.
+                </MudText>
+                <MudText Typo=Typo.body2>
+                    Once I got the algorithm and visualization working, I decided to just rip it and
+                    paste my full puzzle data in as a string literal, because I was running low on
+                    dopamine and needed some validation. I had made a couple critical errors:
+                </MudText>
+                <MudList T=string Dense ReadOnly>
+                    <MudListItem>
+                        I put in a guard clause thinking an individual dialing instruction would never
+                        have a magnitude greater than 100. This was stupid, as glancing through the
+                        data would have shown that they were giving >100 values often.
+                    </MudListItem>
+                    <MudListItem>
+                        The modulo operation had a logical error that resulted in some extremely large
+                        negative dialing results being recorded as =100 after 'correction' instead of
+                        =0.
+                    </MudListItem>
+                </MudList>
+                <MudText Typo=Typo.body2>
+                    After correcting these I was off to the races. Day 1 Part 2 will have to wait til
+                    tomorrow since it is quite late here already and I do need my beauty sleep.
+                </MudText>
+                <MudText Typo=Typo.body2>
+                    However, before signing off completed, I want to note two things I discovered about
+                    the Canvas engine today:
+                </MudText>
+                <MudList T=string Dense ReadOnly>
+                    <MudListItem>
+                        The tick function probably needs to be unregistered in js on a page navigation
+                        away from any page with a <code>SimContainer</code>. Otherwise the invoke into
+                        dotnet will find no object since the clip will be unloaded when the component
+                        disposes. I should have foreseen this, but for the moment I will just ask you
+                        to <code>ctrl+f5</code> or <code>ctrl+R</code> all the time like a caveman.
+                    </MudListItem>
+                    <MudListItem>
+                        However, on the plus side, the hot reload works fucking GREAT. Once a clip is
+                        started, updates to the <code>Draw()</code> function take place immediately on
+                        reload when using <code>dotnet watch</code>. Thanks dotnet team!
+                    </MudListItem>
+                </MudList>
+                </MudStack>
+                
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="day1" Variant=Variant.Filled Color=Color.Primary>Day 1 Visualization</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudTimelineItem>
+</MudTimeline>

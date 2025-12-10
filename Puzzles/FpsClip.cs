@@ -1,58 +1,53 @@
-﻿using System;
-using System.Numerics;
-using System.Diagnostics;
-using nkast.Aether.Physics2D.Collision;
+﻿using System.Diagnostics;
 using nkast.Wasm.Canvas;
 using AOC2025.Engine;
-using aeVector2 = nkast.Aether.Physics2D.Common.Vector2;
 using AOC2025.Extensions;
 
-namespace AOC2025.Puzzles
+namespace AOC2025.Puzzles;
+
+public partial class FpsClip: Clip
 {
-    public partial class FpsClip: Clip
+    Stopwatch _sw = new Stopwatch();
+    private RingBufferFloat frametimes;
+
+    public FpsClip() : base()
     {
-        Stopwatch _sw = new Stopwatch();
-        private RingBufferFloat frametimes;
+        _sw.Start();
+        frametimes = new RingBufferFloat(30);
+    }
+    
+    public override void Draw(DrawContext dc)
+    {
+        var cs = dc.CanvasContext;
 
-        public FpsClip() : base()
+        if (dc.Layer == 2)
         {
-            _sw.Start();
-            frametimes = new RingBufferFloat(30);
-        }
-        
-        public override void Draw(DrawContext dc)
-        {
-            var cs = dc.CanvasContext;
-
-            if (dc.Layer == 2)
-            {
-                long ms = _sw.ElapsedMilliseconds;
-                _sw.Restart();
-                frametimes.Write(ms);
-                float avg = frametimes.Mean();
-                float fps = 1000f / avg;
-                // draw fps
-                cs.Save();
-                cs.FillStyle = "#603090";
-                cs.Font = $"24px bold Verdana";
-                cs.TextAlign = TextAlign.Left;
-                cs.TextBaseline = TextBaseline.Middle;
-                cs.FillText($"Avg FPS: {fps:N1}", 50, 50);
-                cs.Restore();                
-            }
-
-            base.Draw(dc);
+            long ms = _sw.ElapsedMilliseconds;
+            _sw.Restart();
+            frametimes.Write(ms);
+            float avg = frametimes.Mean();
+            float fps = 1000f / avg;
+            // draw fps
+            cs.Save();
+            cs.FillStyle = "#603090";
+            cs.Font = $"24px bold Verdana";
+            cs.TextAlign = TextAlign.Left;
+            cs.TextBaseline = TextBaseline.Middle;
+            cs.FillText($"Avg FPS: {fps:N1}", 50, 50);
+            cs.Restore();                
         }
 
+        base.Draw(dc);
+    }
 
-        protected override void Dispose(bool disposing)
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
         {
-            if (disposing)
-            {
 
-            }
-
-            base.Dispose(disposing);
         }
+
+        base.Dispose(disposing);
     }
 }

@@ -20,6 +20,7 @@ public partial class SimContainer<T> : ComponentBase
     private ElementReference canvas;
     private ElementPosition? ep;
     [Inject] public IJSRuntime JsRuntime {get; set;} = default!;
+    [Parameter] public string? InitialData { get; set; }
 
     // Summary:
     //     Method invoked when the component is ready to start, having received its initial
@@ -45,6 +46,13 @@ public partial class SimContainer<T> : ComponentBase
     private void Init()
     {
         SimulationRootClip = new();
+        SimulationRootClip.SetState(InitialData ?? "");
+    }
+
+    public async Task Reset()
+    {
+        Init();
+        ep = await JsRuntime.InvokeAsync<ElementPosition>("getElementAbsolutePosition", canvas);
     }
 
     Canvas? cs;

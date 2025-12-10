@@ -49,8 +49,22 @@ namespace AOC2025.Engine
             clip.Parent = this;
         }
 
+        /// <summary>
+        /// Override this to receive puzzle data via the container component.
+        /// </summary>
+        /// <param name="NewStateData"></param>
+        public virtual void SetState(string NewStateData)
+        {
+            foreach(Clip clip in _children)
+            {
+                clip.SetState(NewStateData);
+            }
+        }
 
-
+        /// <summary>
+        /// Updates each child clip.
+        /// </summary>
+        /// <param name="uc"></param>
         public virtual void Update(UpdateContext uc)
         {
             Matrix4x4 tx;
@@ -64,6 +78,10 @@ namespace AOC2025.Engine
             }
         }
 
+        /// <summary>
+        /// Draws each child clip.
+        /// </summary>
+        /// <param name="dc"></param>
         public virtual void Draw(DrawContext dc)
         {
             foreach (Clip clip in _children)
