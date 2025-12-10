@@ -1,3 +1,5 @@
+[![Deploy to GitHub Pages](https://github.com/brainiac256/AOC2025/actions/workflows/main.yml/badge.svg)](https://brainiac256.github.io/AOC2025/index.html)
+
 # My Advent of Code 2025 workspace
 
 ## This Year's Code

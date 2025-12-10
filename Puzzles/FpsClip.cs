@@ -29,14 +29,15 @@ namespace AOC2025.Puzzles
                 long ms = _sw.ElapsedMilliseconds;
                 _sw.Restart();
                 frametimes.Write(ms);
-
+                float avg = frametimes.Mean();
+                float fps = 1000f / avg;
                 // draw fps
                 cs.Save();
                 cs.FillStyle = "#603090";
                 cs.Font = $"24px bold Verdana";
                 cs.TextAlign = TextAlign.Left;
                 cs.TextBaseline = TextBaseline.Middle;
-                cs.FillText($"Avg frame time: {ms} ms", 50, 50);
+                cs.FillText($"Avg FPS: {fps:N1}", 50, 50);
                 cs.Restore();                
             }
 
